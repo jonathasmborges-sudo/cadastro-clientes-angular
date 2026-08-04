@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { ClienteService } from '../../servicos/cliente';
-import { Cliente } from '../../modelos/cliente';
+import { PessoaService } from '../../service/pessoa-service';
+import { Pessoa } from '../../model/pessoa';
 
 @Component({
   selector: 'app-consulta',
@@ -12,22 +12,22 @@ import { Cliente } from '../../modelos/cliente';
   styleUrl: './consulta.css'
 })
 export class Consulta implements OnInit {
-  clientes: Cliente[] = [];
+  clientes: Pessoa[] = [];
   termoBusca: string = '';
 
-  constructor(private clienteService: ClienteService) {}
+  constructor(private pessoaService: PessoaService) {}
 
   ngOnInit(): void {
     this.carregarClientes();
   }
 
   carregarClientes(): void {
-    this.clientes = this.clienteService.pesquisar(this.termoBusca);
+    this.clientes = this.pessoaService.pesquisar(this.termoBusca);
   }
 
   excluir(id?: string): void {
     if (id && confirm('Deseja realmente excluir este cliente?')) {
-      this.clienteService.excluir(id);
+      this.pessoaService.excluir(id);
       this.carregarClientes();
     }
   }
