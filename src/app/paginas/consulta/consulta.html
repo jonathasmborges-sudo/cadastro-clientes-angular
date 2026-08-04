@@ -1,1 +1,56 @@
-<p>consulta works!</p>
+<div style="max-width: 1000px; margin: 0 auto; padding: 20px;">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <h2>Consulta de Clientes</h2>
+    <a routerLink="/cadastro" style="padding: 10px 16px; background-color: #16a34a; color: white; text-decoration: none; border-radius: 4px; font-weight: bold;">
+      + Novo Cliente
+    </a>
+  </div>
+
+  <div style="margin-bottom: 20px; display: flex; gap: 10px;">
+    <input 
+      type="text" 
+      [(ngModel)]="termoBusca" 
+      (input)="carregarClientes()" 
+      placeholder="Pesquisar cliente por nome..." 
+      style="flex: 1; padding: 10px; border: 1px solid #cbd5e1; border-radius: 4px; box-sizing: border-box;"
+    />
+  </div>
+
+  <table style="width: 100%; border-collapse: collapse; text-align: left; background-color: white; border: 1px solid #e2e8f0;">
+    <thead>
+      <tr style="background-color: #f8fafc; border-bottom: 2px solid #e2e8f0;">
+        <th style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Nome</th>
+        <th style="padding: 12px; border-bottom: 1px solid #e2e8f0;">E-mail</th>
+        <th style="padding: 12px; border-bottom: 1px solid #e2e8f0;">CPF</th>
+        <th style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Data Nasc.</th>
+        <th style="padding: 12px; border-bottom: 1px solid #e2e8f0;">UF</th>
+        <th style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Município</th>
+        <th style="padding: 12px; border-bottom: 1px solid #e2e8f0; text-align: center;">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of clientes" style="border-bottom: 1px solid #e2e8f0;">
+        <td style="padding: 12px;">{{ c.nome }}</td>
+        <td style="padding: 12px;">{{ c.email }}</td>
+        <td style="padding: 12px;">{{ c.cpf }}</td>
+        <td style="padding: 12px;">{{ c.dataNascimento }}</td>
+        <td style="padding: 12px;">{{ c.uf }}</td>
+        <td style="padding: 12px;">{{ c.municipio }}</td>
+        <td style="padding: 12px; text-align: center; white-space: nowrap;">
+          <a [routerLink]="['/editar', c.id]" style="margin-right: 8px; padding: 6px 12px; background-color: #0284c7; color: white; text-decoration: none; border-radius: 4px; font-size: 14px;">
+            Editar
+          </a>
+          <button (click)="excluir(c.id)" style="padding: 6px 12px; background-color: #dc2626; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px;">
+            Excluir
+          </button>
+        </td>
+      </tr>
+
+      <tr *if="clientes.length === 0">
+        <td colspan="7" style="padding: 20px; text-align: center; color: #64748b;">
+          Nenhum cliente encontrado.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
