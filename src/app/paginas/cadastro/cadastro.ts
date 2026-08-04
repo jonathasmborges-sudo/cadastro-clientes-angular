@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
-import { ClienteService } from '../../servicos/cliente';
-import { Cliente } from '../../modelos/cliente';
+import { PessoaService } from '../../service/pessoa-service';
+import { Pessoa } from '../../model/pessoa';
 
 @Component({
   selector: 'app-cadastro',
@@ -12,7 +12,7 @@ import { Cliente } from '../../modelos/cliente';
   styleUrl: './cadastro.css'
 })
 export class Cadastro implements OnInit {
-  cliente: Cliente = {
+  cliente: Pessoa = {
     nome: '',
     email: '',
     cpf: '',
@@ -24,7 +24,7 @@ export class Cadastro implements OnInit {
   modoEdicao = false;
 
   constructor(
-    private clienteService: ClienteService,
+    private pessoaService: PessoaService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
@@ -32,7 +32,7 @@ export class Cadastro implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      const clienteEncontrado = this.clienteService.obterPorId(id);
+      const clienteEncontrado = this.pessoaService.obterPorId(id);
       if (clienteEncontrado) {
         this.cliente = { ...clienteEncontrado };
         this.modoEdicao = true;
@@ -41,7 +41,7 @@ export class Cadastro implements OnInit {
   }
 
   salvar(): void {
-    this.clienteService.salvar(this.cliente);
+    this.pessoaService.salvar(this.cliente);
     this.router.navigate(['/consulta']);
   }
 }
