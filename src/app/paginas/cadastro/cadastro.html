@@ -1,1 +1,44 @@
-<p>cadastro works!</p>
+<div style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #cbd5e1; border-radius: 8px;">
+  <h2>{{ modoEdicao ? 'Editar Cliente' : 'Cadastro de Cliente' }}</h2>
+  
+  <form (ngSubmit)="salvar()">
+    <div style="margin-bottom: 15px;">
+      <label style="display: block; margin-bottom: 5px;">Nome Completo:</label>
+      <input type="text" [(ngModel)]="cliente.nome" name="nome" required style="width: 100%; padding: 8px; box-sizing: border-box;" />
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <label style="display: block; margin-bottom: 5px;">E-mail:</label>
+      <input type="email" [(ngModel)]="cliente.email" name="email" required style="width: 100%; padding: 8px; box-sizing: border-box;" />
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <label style="display: block; margin-bottom: 5px;">CPF:</label>
+      <input type="text" [(ngModel)]="cliente.cpf" name="cpf" required style="width: 100%; padding: 8px; box-sizing: border-box;" />
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <label style="display: block; margin-bottom: 5px;">Data de Nascimento:</label>
+      <input type="date" [(ngModel)]="cliente.dataNascimento" name="dataNascimento" required style="width: 100%; padding: 8px; box-sizing: border-box;" />
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <label style="display: block; margin-bottom: 5px;">UF:</label>
+      <input type="text" [(ngModel)]="cliente.uf" name="uf" required style="width: 100%; padding: 8px; box-sizing: border-box;" />
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <label style="display: block; margin-bottom: 5px;">Município:</label>
+      <input type="text" [(ngModel)]="cliente.municipio" name="municipio" required style="width: 100%; padding: 8px; box-sizing: border-box;" />
+    </div>
+
+    <div style="display: flex; gap: 10px;">
+      <button type="submit" style="padding: 10px 20px; background-color: #2563eb; color: white; border: none; border-radius: 4px; cursor: pointer;">
+        {{ modoEdicao ? 'Atualizar' : 'Salvar' }}
+      </button>
+      <a routerLink="/consulta" style="padding: 10px 20px; background-color: #64748b; color: white; text-decoration: none; border-radius: 4px; display: inline-block;">
+        Cancelar
+      </a>
+    </div>
+  </form>
+</div>
