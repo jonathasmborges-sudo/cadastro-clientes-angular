@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { PessoaService } from '../../service/pessoa-service';
-import { Pessoa } from '../../model/pessoa';
+import { Pessoa } from '../../models/pessoa';
 
 @Component({
   selector: 'app-cadastro',
