@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { PessoaService } from '../../service/pessoa-service';
 import { IbgeService, EstadoIBGE, MunicipioIBGE } from '../../service/ibge-service';
-import { Pessoa } from '../../model/pessoa';
+import { Pessoa } from '../../models/pessoa';
 import { formatarCPF } from '../../utils/formatters';
 
 @Component({
