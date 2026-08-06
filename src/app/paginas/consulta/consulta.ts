@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { PessoaService } from '../../service/pessoa-service';
-import { Pessoa } from '../../models/pessoa';
+import { Pessoa } from '../../model/pessoa';
+import { formatarCPF, formatarDataBR } from '../../utils/formatters';
 
 @Component({
   selector: 'app-consulta',
@@ -30,5 +31,13 @@ export class Consulta implements OnInit {
       this.pessoaService.excluir(id);
       this.carregarClientes();
     }
+  }
+
+  formatarCPF(cpf: string): string {
+    return formatarCPF(cpf);
+  }
+
+  formatarDataBR(data: string): string {
+    return formatarDataBR(data);
   }
 }
