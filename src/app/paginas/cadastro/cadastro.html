@@ -1,4 +1,4 @@
-<div style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #cbd5e1; border-radius: 8px;">
+<div style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #cbd5e1; border-radius: 8px; background-color: #ffffff;">
   <h2>{{ modoEdicao ? 'Editar Cliente' : 'Cadastro de Cliente' }}</h2>
   
   <form (ngSubmit)="salvar()">
@@ -14,7 +14,7 @@
 
     <div style="margin-bottom: 15px;">
       <label style="display: block; margin-bottom: 5px;">CPF:</label>
-      <input type="text" [(ngModel)]="cliente.cpf" name="cpf" required style="width: 100%; padding: 8px; box-sizing: border-box;" />
+      <input type="text" [(ngModel)]="cliente.cpf" (input)="aoMudarCpf()" name="cpf" maxlength="14" placeholder="000.000.000-00" required style="width: 100%; padding: 8px; box-sizing: border-box;" />
     </div>
 
     <div style="margin-bottom: 15px;">
@@ -24,12 +24,22 @@
 
     <div style="margin-bottom: 15px;">
       <label style="display: block; margin-bottom: 5px;">UF:</label>
-      <input type="text" [(ngModel)]="cliente.uf" name="uf" required style="width: 100%; padding: 8px; box-sizing: border-box;" />
+      <select [(ngModel)]="cliente.uf" (change)="aoMudarUf()" name="uf" required style="width: 100%; padding: 8px; box-sizing: border-box;">
+        <option value="">Selecione o Estado</option>
+        <option *ngFor="let e of estados" [value]="e.sigla">
+          {{ e.nome }} ({{ e.sigla }})
+        </option>
+      </select>
     </div>
 
     <div style="margin-bottom: 15px;">
       <label style="display: block; margin-bottom: 5px;">Município:</label>
-      <input type="text" [(ngModel)]="cliente.municipio" name="municipio" required style="width: 100%; padding: 8px; box-sizing: border-box;" />
+      <select [(ngModel)]="cliente.municipio" name="municipio" [disabled]="!cliente.uf" required style="width: 100%; padding: 8px; box-sizing: border-box;">
+        <option value="">Selecione o Município</option>
+        <option *ngFor="let m of municipios" [value]="m.nome">
+          {{ m.nome }}
+        </option>
+      </select>
     </div>
 
     <div style="display: flex; gap: 10px;">
